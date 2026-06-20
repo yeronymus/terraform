@@ -1,0 +1,47 @@
+name: "IaC Code Validation"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  terraform-ci:
+    name: "Terraform Lint & Validate"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - name: Check Terraform Formatting
+        run: terraform fmt -check -recursive
+
+      - name: Initialize Backendless Terraform
+        run: terraform init -backend=false
+
+      - name: Validate Terraform Syntax
+        run: terraform validate
+
+  ansible-ci:
+    name: "Ansible Lint"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Ansible Lint
+        uses: ansible/ansible-lint-action@v6
+        with:
+          path: "ansible/"
