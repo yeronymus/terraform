@@ -1,0 +1,7 @@
+# Example values — copy to packer.pkrvars.hcl and fill in real secrets.
+# packer.pkrvars.hcl is gitignored.
+
+proxmox_api_url          = "https://100.90.175.9:8006/api2/json"
+proxmox_api_token_id     = "terraform-prov@pve!tf-token"
+proxmox_api_token_secret = "CHANGE_ME"
+ssh_public_key           = "ssh-ed25519 AAAAC3... you@host"

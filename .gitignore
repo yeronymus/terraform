@@ -29,9 +29,13 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# Local binary and licenses
+# Local binaries and licenses
 terraform
+packer-bin
 LICENSE.txt
+
+# Packer secrets
+packer/packer.pkrvars.hcl
 
 # Ansible virtual environment
 ansible/venv/
